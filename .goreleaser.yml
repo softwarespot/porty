@@ -1,0 +1,56 @@
+version: 2
+
+before:
+    hooks:
+        - go mod tidy
+
+builds:
+    - id: porty
+      binary: porty
+      ldflags:
+          - -X github.com/softwarespot/porty/internal/version.Version={{.Version}}
+          - -X github.com/softwarespot/porty/internal/version.Time={{.Date}}
+          - -X github.com/softwarespot/porty/internal/version.User={{.Env.USER}}
+          - -X github.com/softwarespot/porty/internal/version.GoVersion={{.Env.GO_VERSION}}
+          - -s
+          - -w
+      env:
+          - CGO_ENABLED=0
+          - GO_VERSION=1.23
+          - USER=SoftwareSpot
+      goos:
+          - darwin
+          - linux
+          - windows
+      goarch:
+          - amd64
+          - arm64
+      goarm:
+          - '7'
+      ignore:
+          - goos: darwin
+            goarch: arm
+
+archives:
+    - name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}'
+      format: tar.xz
+      format_overrides:
+          - goos: windows
+            format: zip
+      wrap_in_directory: true
+      files:
+          - LICENSE
+          - README.md
+
+checksum:
+    name_template: '{{ .ProjectName }}_{{ .Version }}_checksums.txt'
+
+release:
+    draft: false
+
+changelog:
+    sort: asc
+    filters:
+        exclude:
+            - '^docs:'
+            - '^test:'
