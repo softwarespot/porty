@@ -32,7 +32,7 @@ Initialize the ports database.
 
 ```bash
 # As text
-porty init --json
+porty init
 
 # As JSON
 porty init --json
