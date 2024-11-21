@@ -16,11 +16,7 @@ build:
 	@echo building to bin/porty
 	@go build $(LDFLAGS) -o ./bin/porty
 
-install:
-	@echo copying bin/porty to $(HOME)/bin/porty
-	@mv ./bin/porty $(HOME)/bin/porty
-
 test:
 	@go test -cover -v ./...
 
-.PHONY: build install test
+.PHONY: build test

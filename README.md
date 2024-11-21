@@ -11,22 +11,20 @@ This application is a ports manager, for registering an application name and get
 
 ## Installation
 
+### Binaries
+
 `porty` is available on Linux, macOS and Windows platforms.
 Binaries for Linux, Windows and Mac are available as tarballs in the [release page](https://github.com/softwarespot/porty/releases).
 
-## Local
+### Go Install
 
-Build the binary `porty` executable to the directory `./bin` i.e. `./bin/porty`.
-
-```bash
-make
-```
-
-Install i.e. copy the executable `./bin/porty` to `$HOME/bin` (if it exists).
+Install to the Go `bin` directory e.g. `$HOME/go/bin/`.
 
 ```bash
-make install
+go install github.com/softwarespot/porty@latest
 ```
+
+### Usage
 
 Initialize the ports database.
 
@@ -92,18 +90,6 @@ porty who 8001
 
 # As JSON
 porty who 8001 --json
-```
-
-### Init
-
-Initialize the ports database.
-
-```bash
-# As text
-porty init
-
-# As JSON
-porty init --json
 ```
 
 ### Version
