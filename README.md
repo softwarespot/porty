@@ -26,10 +26,16 @@ go install github.com/softwarespot/porty@latest
 
 ### Usage
 
+### Init
+
 Initialize the ports database.
 
 ```bash
-porty init
+# As text
+porty init --json
+
+# As JSON
+porty init --json
 ```
 
 ### Get
