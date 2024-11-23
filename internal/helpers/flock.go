@@ -59,5 +59,8 @@ func (f *Flock) Lock(exclusive bool, timeout time.Duration) error {
 }
 
 func (f *Flock) Unlock() error {
-	return fmt.Errorf("unable to unlock the path %q: %w", f.path, f.flock.Unlock())
+	if err := f.flock.Unlock(); err != nil {
+		return fmt.Errorf("unable to unlock the path %q: %w", f.path, f.flock.Unlock())
+	}
+	return nil
 }
