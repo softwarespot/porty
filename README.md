@@ -6,8 +6,8 @@ This application is a ports manager, for registering an application name and get
 
 ## Prerequisites
 
--   go 1.23.0 or above
--   make (if you want to use the `Makefile` provided)
+- go 1.23.0 or above
+- make (if you want to use the `Makefile` provided)
 
 ## Installation
 
@@ -124,19 +124,19 @@ Adds autocompletion for the application's commands.
 
 Add the following line to the `.bashrc` file; otherwise, refer to [kubectl's](https://kubernetes.io/docs/tasks/tools/install-kubectl/#optional-kubectl-configurations) documentation about locations for other OSs
 
--   For `bash`
+- For `bash`
 
 ```bash
 source <(porty completion bash)
 ```
 
--   For `fish`
+- For `fish`
 
 ```bash
 source <(porty completion fish)
 ```
 
--   For `zsh`
+- For `zsh`
 
 ```bash
 source <(porty completion zsh)
