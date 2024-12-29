@@ -1,8 +1,6 @@
 package helpers
 
-import (
-	"time"
-)
+import "time"
 
 // FormatAsDateTime formats time to a "YYYY-MM-DD HH:MM:SS" string in the current location
 func FormatAsDateTime(t time.Time) string {
