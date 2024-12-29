@@ -68,4 +68,32 @@ func Test_New(t *testing.T) {
 	up, err = p.Register("test-user", "test-app-name-1")
 	testhelpers.AssertError(t, err)
 	testhelpers.AssertEqual(t, up.Port, 0)
+
+	// Should unregister many ports
+	for i := DefaultMinPort; i <= DefaultMaxPort; i++ {
+		up, err := p.Unregister("test-user", strconv.Itoa(int(i)))
+		testhelpers.AssertNoError(t, err)
+		testhelpers.AssertEqual(t, i, up.Port)
+	}
+
+	// Should get the next available port (in sequence)
+	up, err = p.Register("test-user", "test-app-name-1")
+	testhelpers.AssertNoError(t, err)
+	testhelpers.AssertEqual(t, up.Port, 8000)
+
+	up, err = p.Register("test-user", "test-app-name-2")
+	testhelpers.AssertNoError(t, err)
+	testhelpers.AssertEqual(t, up.Port, 8001)
+
+	up, err = p.Register("test-user", "test-app-name-3")
+	testhelpers.AssertNoError(t, err)
+	testhelpers.AssertEqual(t, up.Port, 8002)
+
+	up, err = p.Unregister("test-user", "test-app-name-2")
+	testhelpers.AssertNoError(t, err)
+	testhelpers.AssertEqual(t, up.Port, 8001)
+
+	port, err = p.Next()
+	testhelpers.AssertNoError(t, err)
+	testhelpers.AssertEqual(t, port, 8001)
 }
