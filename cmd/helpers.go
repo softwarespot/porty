@@ -14,7 +14,7 @@ func expandExecutable(format string, a ...any) string {
 	return strings.ReplaceAll(fmt.Sprintf(format, a...), "<EXE>", helpers.ExecutableName())
 }
 
-func getPortyDir() (string, error) {
+func getDatabaseDir() (string, error) {
 	dir, err := os.UserConfigDir()
 	if err != nil {
 		return "", fmt.Errorf("unable to get the user configuration directory")
@@ -31,7 +31,7 @@ func getDatabasePath(opts *cliOptions) (string, error) {
 	return absPath, nil
 }
 
-func runPortsFunc(opts *cliOptions, fn func(username string, m *ports.Manager) error) error {
+func execPortsFunc(opts *cliOptions, fn func(username string, m *ports.Manager) error) error {
 	username, err := helpers.Username()
 	if err != nil {
 		return err

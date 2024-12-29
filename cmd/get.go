@@ -14,7 +14,7 @@ func newGetCmd(opts *cliOptions) *cobra.Command {
 		Args:              cobra.MinimumNArgs(1),
 		ValidArgsFunction: createCompleteAppNames(opts),
 		RunE: func(_ *cobra.Command, args []string) error {
-			return runPortsFunc(opts, func(username string, m *ports.Manager) error {
+			return execPortsFunc(opts, func(username string, m *ports.Manager) error {
 				appName := args[0]
 				if up, err := m.Get(username, appName); err == nil {
 					if opts.flags.asJSON {

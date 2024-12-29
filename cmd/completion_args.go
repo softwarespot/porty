@@ -14,7 +14,7 @@ func createCompleteAppNames(opts *cliOptions) func(cmd *cobra.Command, args []st
 		var appnames []string
 
 		// Ignore the error
-		runPortsFunc(opts, func(username string, m *ports.Manager) error {
+		execPortsFunc(opts, func(username string, m *ports.Manager) error {
 			ups, err := m.AllByUsername(username, ports.SortByUsernameAppName)
 			if err != nil {
 				return err
@@ -37,7 +37,7 @@ func createCompletePorts(opts *cliOptions) func(cmd *cobra.Command, args []strin
 		var ps []string
 
 		// Ignore the error
-		runPortsFunc(opts, func(_ string, m *ports.Manager) error {
+		execPortsFunc(opts, func(_ string, m *ports.Manager) error {
 			for _, up := range m.All(ports.SortByUsernameAppName) {
 				ps = append(ps, up.Port.String())
 			}

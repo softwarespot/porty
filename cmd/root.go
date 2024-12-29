@@ -91,7 +91,7 @@ See https://github.com/softwarespot/porty for more details about the application
 		newVersionCmd(opts),
 	)
 
-	dir, err := getPortyDir()
+	dir, err := getDatabaseDir()
 	if err != nil {
 		return nil, err
 	}
@@ -106,10 +106,11 @@ See https://github.com/softwarespot/porty for more details about the application
 
 // Execute adds all child commands to the root command and sets flags appropriately
 func Execute() {
+	logger := logging.NewLogger()
 	opts := &cliOptions{
 		flags:  cliFlags{},
 		dbName: "porty_db.json",
-		logger: logging.NewLogger(),
+		logger: logger,
 	}
 
 	root, err := newRootCmd(opts)

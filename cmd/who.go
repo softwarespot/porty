@@ -23,7 +23,7 @@ func newWhoCmd(opts *cliOptions) *cobra.Command {
 		Args:              cobra.MinimumNArgs(1),
 		ValidArgsFunction: createCompletePorts(opts),
 		RunE: func(_ *cobra.Command, args []string) error {
-			return runPortsFunc(opts, func(_ string, m *ports.Manager) error {
+			return execPortsFunc(opts, func(_ string, m *ports.Manager) error {
 				port, err := m.ToPort(args[0])
 				if err != nil {
 					return err

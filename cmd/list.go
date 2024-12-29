@@ -25,7 +25,7 @@ List all port numbers for all users
 	$ <EXE> list --all`),
 		Short: "List all port numbers",
 		RunE: func(_ *cobra.Command, _ []string) error {
-			return runPortsFunc(opts, func(username string, m *ports.Manager) error {
+			return execPortsFunc(opts, func(username string, m *ports.Manager) error {
 				sortBy, err := m.ToSortBy(opts.flags.list.sortBy)
 				if err != nil {
 					return err

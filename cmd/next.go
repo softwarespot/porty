@@ -14,7 +14,7 @@ func newNextCmd(opts *cliOptions) *cobra.Command {
 	$ <EXE> next`),
 		Short: "Get the next available port number, without assigning to an app name",
 		RunE: func(_ *cobra.Command, _ []string) error {
-			return runPortsFunc(opts, func(_ string, m *ports.Manager) error {
+			return execPortsFunc(opts, func(_ string, m *ports.Manager) error {
 				port, err := m.Next()
 				if err != nil {
 					return err
