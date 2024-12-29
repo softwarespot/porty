@@ -15,7 +15,7 @@ const (
 	DefaultMaxPort Port = 9000
 )
 
-var userPortOnError = UserPort{}
+var defaultUserPort = UserPort{}
 
 type Ports struct {
 	MinPort   Port       `json:"minPort"`
@@ -70,16 +70,16 @@ func (p *Ports) AllByUsername(username string, sortBy SortBy) ([]UserPort, error
 
 func (p *Ports) Register(username, appName string) (UserPort, error) {
 	if err := validateUsernameAppName(username, appName); err != nil {
-		return userPortOnError, err
+		return defaultUserPort, err
 	}
 
 	if idx := p.getIndex(username, appName); idx >= 0 {
-		return userPortOnError, fmt.Errorf("port exists for the username %q and app name %q", username, appName)
+		return defaultUserPort, fmt.Errorf("port exists for the username %q and app name %q", username, appName)
 	}
 
 	port, err := p.Next()
 	if err != nil {
-		return userPortOnError, fmt.Errorf("unable to get the next port: %w", err)
+		return defaultUserPort, fmt.Errorf("unable to get the next port: %w", err)
 	}
 
 	now := time.Now()
@@ -99,12 +99,12 @@ func (p *Ports) Register(username, appName string) (UserPort, error) {
 
 func (p *Ports) Unregister(username, appName string) (UserPort, error) {
 	if err := validateUsernameAppName(username, appName); err != nil {
-		return userPortOnError, err
+		return defaultUserPort, err
 	}
 
 	idx := p.getIndex(username, appName)
 	if idx == -1 {
-		return userPortOnError, fmt.Errorf("no port exists for the username %q and app name %q", username, appName)
+		return defaultUserPort, fmt.Errorf("no port exists for the username %q and app name %q", username, appName)
 	}
 
 	up := p.UserPorts[idx]
@@ -115,12 +115,12 @@ func (p *Ports) Unregister(username, appName string) (UserPort, error) {
 
 func (p *Ports) Get(username, appName string) (UserPort, error) {
 	if err := validateUsernameAppName(username, appName); err != nil {
-		return userPortOnError, err
+		return defaultUserPort, err
 	}
 
 	idx := p.getIndex(username, appName)
 	if idx == -1 {
-		return userPortOnError, fmt.Errorf("no port exists for the username %q and app name %q", username, appName)
+		return defaultUserPort, fmt.Errorf("no port exists for the username %q and app name %q", username, appName)
 	}
 
 	up := p.UserPorts[idx]
@@ -136,19 +136,19 @@ func (p *Ports) GetByPort(port Port) (UserPort, error) {
 			return up, nil
 		}
 	}
-	return userPortOnError, fmt.Errorf("no port exists of %d", port)
+	return defaultUserPort, fmt.Errorf("no port exists of %d", port)
 }
 
 func (p *Ports) Next() (Port, error) {
-	i := 0
+	idx := 0
 	for port := p.MinPort; port <= p.MaxPort; port++ {
-		if i >= len(p.UserPorts) {
+		if idx >= len(p.UserPorts) {
 			return port, nil
 		}
-		if p.UserPorts[i].Port != port {
+		if p.UserPorts[idx].Port != port {
 			return port, nil
 		}
-		i++
+		idx++
 	}
 	return 0, fmt.Errorf("all ports between %d-%d, have been registered", p.MinPort, p.MaxPort)
 }

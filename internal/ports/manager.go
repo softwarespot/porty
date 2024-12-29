@@ -102,11 +102,11 @@ func (m *Manager) Register(username, appName string) (UserPort, error) {
 
 	up, err := m.ports.Register(username, appName)
 	if err != nil {
-		return userPortOnError, err
+		return defaultUserPort, err
 	}
 
 	if err := m.write(); err != nil {
-		return userPortOnError, err
+		return defaultUserPort, err
 	}
 	return up, nil
 }
@@ -117,11 +117,11 @@ func (m *Manager) Unregister(username, appName string) (UserPort, error) {
 
 	up, err := m.ports.Unregister(username, appName)
 	if err != nil {
-		return userPortOnError, err
+		return defaultUserPort, err
 	}
 
 	if err := m.write(); err != nil {
-		return userPortOnError, err
+		return defaultUserPort, err
 	}
 	return up, nil
 }
@@ -132,11 +132,11 @@ func (m *Manager) Get(username, appName string) (UserPort, error) {
 
 	up, err := m.ports.Get(username, appName)
 	if err != nil {
-		return userPortOnError, err
+		return defaultUserPort, err
 	}
 
 	if err := m.write(); err != nil {
-		return userPortOnError, err
+		return defaultUserPort, err
 	}
 	return up, nil
 }

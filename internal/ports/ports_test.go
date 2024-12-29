@@ -13,7 +13,7 @@ func Test_New(t *testing.T) {
 	// Should return an error if the username and app name doesn't exist
 	up, err := p.Get("test-user", "test-app-name-1")
 	testhelpers.AssertError(t, err)
-	testhelpers.AssertEqual(t, up, userPortOnError)
+	testhelpers.AssertEqual(t, up, defaultUserPort)
 
 	port, err := p.Next()
 	testhelpers.AssertNoError(t, err)
@@ -45,7 +45,7 @@ func Test_New(t *testing.T) {
 
 	up, err = p.Get("test-user", "test-app-name-1")
 	testhelpers.AssertError(t, err)
-	testhelpers.AssertEqual(t, up, userPortOnError)
+	testhelpers.AssertEqual(t, up, defaultUserPort)
 
 	// Should get the next available port
 	port, err = p.Next()
