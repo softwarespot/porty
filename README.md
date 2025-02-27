@@ -163,13 +163,13 @@ an external service e.g. Redis, MySQL or Prometheus.
 Docker
 
 ```bash
-docker run --rm -v $(pwd):/app -w /app golangci/golangci-lint:latest golangci-lint run -v --tests=false --disable-all -E durationcheck,errorlint,exhaustive,gocritic,gosimple,ineffassign,misspell,predeclared,revive,staticcheck,unparam,unused,whitespace --max-issues-per-linter=10000 --max-same-issues=10000
+docker run --rm -v $(pwd):/app -w /app golangci/golangci-lint:latest golangci-lint run --tests=false --default=none -E durationcheck,errorlint,exhaustive,gocritic,ineffassign,misspell,predeclared,revive,staticcheck,unparam,unused,whitespace --max-issues-per-linter=10000 --max-same-issues=10000
 ```
 
 Local
 
 ```bash
-golangci-lint run --tests=false --disable-all -E durationcheck,errorlint,exhaustive,gocritic,gosimple,ineffassign,misspell,predeclared,revive,staticcheck,unparam,unused,whitespace --max-issues-per-linter=10000 --max-same-issues=10000
+golangci-lint run --tests=false --default=none -E durationcheck,errorlint,exhaustive,gocritic,ineffassign,misspell,predeclared,revive,staticcheck,unparam,unused,whitespace --max-issues-per-linter=10000 --max-same-issues=10000
 ```
 
 ## License
