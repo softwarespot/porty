@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/gofrs/flock v0.12.1
 	github.com/gosuri/uitable v0.0.4
-	github.com/mergestat/timediff v0.0.3
+	github.com/mergestat/timediff v0.0.4
 	github.com/spf13/cobra v1.9.1
 )
 
