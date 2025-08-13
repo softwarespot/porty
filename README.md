@@ -6,7 +6,7 @@ This application is a ports manager, for registering an application name and get
 
 ## Prerequisites
 
-- go 1.24.0 or above
+- go 1.25.0 or above
 - make (if you want to use the `Makefile` provided)
 
 ## Installation
